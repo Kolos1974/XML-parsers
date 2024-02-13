@@ -1,0 +1,11 @@
+C:\Users\Kolos\Documents\Sajat\XML-parsers\WindowsFormsApp_NET_Framework\WindowsFormsApp_NET_Framework\bin\Debug\WindowsFormsApp_NET_Framework.exe.config
+C:\Users\Kolos\Documents\Sajat\XML-parsers\WindowsFormsApp_NET_Framework\WindowsFormsApp_NET_Framework\bin\Debug\WindowsFormsApp_NET_Framework.exe
+C:\Users\Kolos\Documents\Sajat\XML-parsers\WindowsFormsApp_NET_Framework\WindowsFormsApp_NET_Framework\bin\Debug\WindowsFormsApp_NET_Framework.pdb
+C:\Users\Kolos\Documents\Sajat\XML-parsers\WindowsFormsApp_NET_Framework\WindowsFormsApp_NET_Framework\obj\Debug\WindowsFormsApp_NET_Framework.csproj.AssemblyReference.cache
+C:\Users\Kolos\Documents\Sajat\XML-parsers\WindowsFormsApp_NET_Framework\WindowsFormsApp_NET_Framework\obj\Debug\WindowsFormsApp_NET_Framework.csproj.SuggestedBindingRedirects.cache
+C:\Users\Kolos\Documents\Sajat\XML-parsers\WindowsFormsApp_NET_Framework\WindowsFormsApp_NET_Framework\obj\Debug\WindowsFormsApp_NET_Framework.Properties.Resources.resources
+C:\Users\Kolos\Documents\Sajat\XML-parsers\WindowsFormsApp_NET_Framework\WindowsFormsApp_NET_Framework\obj\Debug\WindowsFormsApp_NET_Framework.csproj.GenerateResource.cache
+C:\Users\Kolos\Documents\Sajat\XML-parsers\WindowsFormsApp_NET_Framework\WindowsFormsApp_NET_Framework\obj\Debug\WindowsFormsApp_NET_Framework.csproj.CoreCompileInputs.cache
+C:\Users\Kolos\Documents\Sajat\XML-parsers\WindowsFormsApp_NET_Framework\WindowsFormsApp_NET_Framework\obj\Debug\WindowsFormsApp_NET_Framework.exe
+C:\Users\Kolos\Documents\Sajat\XML-parsers\WindowsFormsApp_NET_Framework\WindowsFormsApp_NET_Framework\obj\Debug\WindowsFormsApp_NET_Framework.pdb
+C:\Users\Kolos\Documents\Sajat\XML-parsers\WindowsFormsApp_NET_Framework\WindowsFormsApp_NET_Framework\obj\Debug\WindowsFormsApp_NET_Framework.Form1.resources
