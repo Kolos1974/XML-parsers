@@ -8,6 +8,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.Xml;
+using System.Xml.Linq;
 using System.Xml.Serialization;
 using WindowsFormsApp_NET_Framework;
 
@@ -16,17 +18,21 @@ namespace WindowsFormsApp_NET_Framework
     public partial class Form1 : Form
     {
 
-
+        // A letöltött XSD-ből készült osztályok
         WindowsFormsApp_NET_Framework_CAMT.Document doc1;
 
         // BankStatement bnkstm;
-        Document doc2;
+        // Document doc2;
+        XmlDocument doc2;
+
+
 
         public Form1()
         {
             InitializeComponent();
             doc1 = new WindowsFormsApp_NET_Framework_CAMT.Document();
-            doc2 = new Document();
+            // doc2 = new Document();
+            doc2 = new XmlDocument();
         }
 
 
@@ -64,8 +70,8 @@ namespace WindowsFormsApp_NET_Framework
                         }
                         else
                         {
-                            ser = new XmlSerializer(typeof(Document));
-                            doc2 = (Document)ser.Deserialize(sr);
+                            ser = new XmlSerializer(typeof(XmlDocument));
+                            doc2 = (XmlDocument)ser.Deserialize(sr);
 
                             MessageBox.Show("Az XML file beolvasásra került!");
                             label2.Text = doc2.ToString();
@@ -107,7 +113,8 @@ namespace WindowsFormsApp_NET_Framework
             else
             {
                 // XML tartalomból készült osztályoknál
-                foreach (DocumentBkToCstmrStmtStmtNtry ntry in doc2.BkToCstmrStmt.Stmt[0].Ntry)
+                // foreach (DocumentBkToCstmrStmtStmtNtry ntry in doc2.BkToCstmrStmt.Stmt[0].Ntry)
+                foreach (DocumentBkToCstmrStmtStmtNtry ntry in doc2)
                 {
                     Label l = new Label();
                     l.Top = poz;
@@ -142,11 +149,12 @@ namespace WindowsFormsApp_NET_Framework
                         }
                         else
                         {
-                            ser = new XmlSerializer(typeof(Document));
+                            // ser = new XmlSerializer(typeof(Document));
+                            ser = new XmlSerializer(typeof(XmlDocument));
                             ser.Serialize(sw, doc2);
                         }
-                        MessageBox.Show("Az XML file mentésre került!");
                     }
+                    MessageBox.Show("Az XML file mentésre került!");
                 }
                 catch (Exception ex)
                 {
@@ -158,6 +166,12 @@ namespace WindowsFormsApp_NET_Framework
 
         private void btnSaveSzla_Click(object sender, EventArgs e)
         {
+            XmlNode tempNode;
+
+
+            Boolean choosedAcc = false;
+            String choosedAccNum = "";
+
 
             if (saveFileDialog1.ShowDialog() == DialogResult.OK)
             {
@@ -165,10 +179,165 @@ namespace WindowsFormsApp_NET_Framework
                 {
                     using (StreamWriter sw = new StreamWriter(saveFileDialog1.FileName))
                     {
-                        sw.WriteLine("This is the text");
 
-                        MessageBox.Show("A TXT file mentésre került!");
+                        /*
+                        if (radioButton1.Checked)
+                        {
+                            // CAMT XSD-ből
+                            foreach (WindowsFormsApp_NET_Framework_CAMT.ReportEntry2 ntry in doc1.BkToCstmrStmt.Stmt[0].Ntry)
+                            {
+                                // l.Text = ntry.CdtDbtInd.ToString() + " - " + ntry.Amt.Value.ToString();
+                            }
+                        }
+                        else
+                        {
+                            // XML tartalomból készült osztályoknál
+                            // Ez most az első kivonati tételeket olvassa fel, de lehet, hogy az alszámla van elől!!
+                            foreach (DocumentBkToCstmrStmtStmtNtry ntry in doc2.BkToCstmrStmt.Stmt[0].Ntry)
+                            {
+                                // l.Text = ntry.CdtDbtInd.ToString() + " - " + ntry.Amt.Value.ToString();
+
+
+                                //sw.Write(ntry.NtryDtls.TxDtls.RmtInf.Ustrd.ToString());
+
+                                sw.Write("|||");
+                                sw.Write(" ");
+                                sw.Write(ntry.Amt.Value.ToString());
+                                sw.WriteLine("|");
+                            }
+
+                        }
+                        */
+
+                        var nodeList = doc2.GetElementsByTagName("Stmt");
+
+                        // doc2.SelectNodes
+
+                        // nodeList[0].InnerXml.ToString();
+
+                        // Az első kivonat összes node-ja!!
+                        var nodeListStmt = nodeList.Item(0).ChildNodes;
+                        var nodeListNtry = nodeList.Item(0).ChildNodes;
+
+                        // var nodeListNtry = new Xmlch();
+
+
+                        // A kivonat összes számlaszámán végigmegy. Most két kivonbatot tartalmaz!!
+                        foreach (XmlNode node in nodeList)
+                        {
+                            // nodeListNtry = nodeList.Item(0).ChildNodes;
+
+                            nodeListStmt = node.ChildNodes;
+                            nodeListNtry = nodeListStmt.Item(0).ChildNodes;
+
+                            
+
+
+                            // if node["Acct/Id/IBAN"].InnerText
+
+                            // sw.Write(ntry.Amt.Value.ToString());
+                            // sw.Write(nodeListNtry.Item(0).InnerText);
+                            // /sw.Write(node.InnerText);
+                            // // sw.Write(node["Acct/Id/IBAN"].InnerText);
+                            // sw.Write(nodeList[0].InnerXml.ToString());
+
+                            sw.WriteLine(node.InnerText);
+                            sw.WriteLine(node.Name);
+                            // sw.WriteLine(node["IBAN"].InnerText);
+                            // sw.WriteLine(node.Attributes["IBAN"].InnerText);
+
+                            // sw.WriteLine(node.SelectSingleNode("IBAN").InnerText);
+
+
+
+                            foreach (XmlNode node2 in nodeListStmt)
+                            {
+                                sw.Write(node2.InnerText);
+                                sw.Write("|||");
+
+                                sw.Write(node2.Name);
+
+                                if (node2.Name == "Acct")
+                                {
+                                    // sw.Write(node2["Acct/Id/IBAN"].InnerText);
+                                    // sw.Write(node2.Attributes["Acct/Id/IBAN"].InnerText);
+
+                                    sw.WriteLine(node2.InnerXml.ToString());
+                                    sw.WriteLine(node2.ChildNodes.Count.ToString());
+
+                                    foreach (XmlNode node3 in node2.ChildNodes)
+                                    {
+                                        if (node3.Name == "Id")
+                                        {
+                                            XmlNode noteFind = node3.SelectSingleNode("IBAN");
+                                            if (noteFind != null)
+                                            {
+                                                sw.WriteLine(noteFind.InnerText);
+                                            }
+
+                                            sw.WriteLine(node3.InnerXml.ToString());
+                                            sw.WriteLine(node3.InnerText);
+
+                                            foreach(XmlNode node4 in node3.ChildNodes)
+                                            {
+                                                if (node4.Name == "IBAN")
+                                                {
+                                                    sw.WriteLine(node4.InnerXml.ToString());
+                                                    sw.WriteLine(node4.InnerText);
+
+                                                    if (node4.InnerText.Contains("119911020214869800000000"))
+                                                    {
+                                                        choosedAcc = true;
+                                                        // Itt még hioba van!!
+                                                        // choosedAccNum = node4.InnerText.ToString().Substring(5, 24);
+                                                    } else
+                                                    {
+                                                        choosedAcc = false;
+                                                        choosedAccNum = "";
+                                                    }
+                                                }
+
+                                            }
+
+
+                                        }
+                                    }
+
+
+                                    sw.WriteLine(" ");
+
+                                }
+
+
+                                sw.WriteLine(" ");
+                            }
+
+                            sw.WriteLine("");
+                            sw.WriteLine("---------------------");
+                            sw.WriteLine("");
+
+
+                            // if (choosedAcc)
+                            // {
+                                foreach (XmlNode node2 in nodeListNtry)
+                                {
+                                    sw.WriteLine(node2.InnerText);
+
+
+                                    sw.Write("|||");
+                                    sw.Write(" ");
+                                }
+
+                            // }
+
+
+                            sw.WriteLine("|");
+                        }
+
+
                     }
+                    MessageBox.Show("A TXT file mentésre került!");
+
                 }
                 catch (Exception ex)
                 {
