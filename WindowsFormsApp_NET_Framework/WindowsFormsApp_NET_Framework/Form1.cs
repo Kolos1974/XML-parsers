@@ -216,13 +216,14 @@ namespace WindowsFormsApp_NET_Framework
                         // nodeList[0].InnerXml.ToString();
 
                         // Az első kivonat összes node-ja!!
+                        // Ez csak típus meghatározás!
                         var nodeListStmt = nodeList.Item(0).ChildNodes;
                         var nodeListNtry = nodeList.Item(0).ChildNodes;
 
                         // var nodeListNtry = new Xmlch();
 
 
-                        // A kivonat összes számlaszámán végigmegy. Most két kivonbatot tartalmaz!!
+                        // A kivonat összes számlaszámán végigmegy. Most két kivonatot tartalmaz!!
                         foreach (XmlNode node in nodeList)
                         {
                             // nodeListNtry = nodeList.Item(0).ChildNodes;
@@ -243,19 +244,23 @@ namespace WindowsFormsApp_NET_Framework
 
                             sw.WriteLine(node.InnerText);
                             sw.WriteLine(node.Name);
+                            sw.WriteLine("--------------- 1 ----------------");
+
                             // sw.WriteLine(node["IBAN"].InnerText);
                             // sw.WriteLine(node.Attributes["IBAN"].InnerText);
 
                             // sw.WriteLine(node.SelectSingleNode("IBAN").InnerText);
 
 
-
+                            // Az adott Stmt elemein megy végig!
                             foreach (XmlNode node2 in nodeListStmt)
                             {
                                 sw.Write(node2.InnerText);
                                 sw.Write("|||");
 
                                 sw.Write(node2.Name);
+                                sw.WriteLine("--------------- 2 ----------------");
+
 
                                 if (node2.Name == "Acct")
                                 {
@@ -264,7 +269,9 @@ namespace WindowsFormsApp_NET_Framework
 
                                     sw.WriteLine(node2.InnerXml.ToString());
                                     sw.WriteLine(node2.ChildNodes.Count.ToString());
+                                    sw.WriteLine("--------------- 3 ----------------");
 
+                                    // Az Acct összes elemén végigmegy!
                                     foreach (XmlNode node3 in node2.ChildNodes)
                                     {
                                         if (node3.Name == "Id")
@@ -273,23 +280,28 @@ namespace WindowsFormsApp_NET_Framework
                                             if (noteFind != null)
                                             {
                                                 sw.WriteLine(noteFind.InnerText);
+                                                sw.WriteLine("--------------- IBAN ----------------");
                                             }
 
                                             sw.WriteLine(node3.InnerXml.ToString());
                                             sw.WriteLine(node3.InnerText);
+                                            sw.WriteLine("--------------- 4 ----------------");
 
-                                            foreach(XmlNode node4 in node3.ChildNodes)
+
+                                            foreach (XmlNode node4 in node3.ChildNodes)
                                             {
                                                 if (node4.Name == "IBAN")
                                                 {
                                                     sw.WriteLine(node4.InnerXml.ToString());
                                                     sw.WriteLine(node4.InnerText);
 
-                                                    if (node4.InnerText.Contains("119911020214869800000000"))
+                                                    // if (node4.InnerText.Contains("119911020214869800000000"))
+                                                    if (node4.InnerText.Contains(textBox1.Text))
                                                     {
                                                         choosedAcc = true;
-                                                        // Itt még hioba van!!
+                                                        // Itt még hiba van!!
                                                         // choosedAccNum = node4.InnerText.ToString().Substring(5, 24);
+                                                        sw.WriteLine("--------------- Found! ----------------");
                                                     } else
                                                     {
                                                         choosedAcc = false;
@@ -312,13 +324,17 @@ namespace WindowsFormsApp_NET_Framework
                                 sw.WriteLine(" ");
                             }
 
+                            sw.WriteLine("--------------- 5 ----------------");
+
+
                             sw.WriteLine("");
                             sw.WriteLine("---------------------");
                             sw.WriteLine("");
 
 
-                            // if (choosedAcc)
-                            // {
+                            if (choosedAcc)
+                            {
+                                // Ez nem jó, mert az Stmt összes elemén végigmegy!
                                 foreach (XmlNode node2 in nodeListNtry)
                                 {
                                     sw.WriteLine(node2.InnerText);
@@ -328,7 +344,7 @@ namespace WindowsFormsApp_NET_Framework
                                     sw.Write(" ");
                                 }
 
-                            // }
+                            }
 
 
                             sw.WriteLine("|");
