@@ -114,17 +114,31 @@ namespace WindowsFormsApp_NET_Framework
             {
                 // XML tartalomból készült osztályoknál
                 // foreach (DocumentBkToCstmrStmtStmtNtry ntry in doc2.BkToCstmrStmt.Stmt[0].Ntry)
-                foreach (DocumentBkToCstmrStmtStmtNtry ntry in doc2)
+                // foreach (DocumentBkToCstmrStmtStmtNtry ntry in doc2)
+                // foreach (XmlElement ntry in doc2)
+                // foreach (XmlNode ntry in doc2)
+                foreach (XmlElement ntry in doc2)
                 {
+
                     Label l = new Label();
                     l.Top = poz;
                     l.Left = 200;
                     l.Width = 500;
-                    l.Text = ntry.ToString();
-                    l.Text = ntry.CdtDbtInd.ToString() + " - " + ntry.Amt.Value.ToString();
+                    l.Text = " - " + ntry.ToString() + " - ";
+                    // l.Text = ntry.CdtDbtInd.ToString() + " - " + ntry.Amt.Value.ToString();
+                    // l.Text = " - " +  ntry.InnerText.ToString() + " - ";
+                    
+                    // label2.Text = " - " + ntry.InnerText.ToString() + " - ";
+
                     Controls.Add(l);
                     poz += 40;
+
+                    l.Text = ntry.InnerText.ToString();
+
+                    listBox1.Items.Add("- "+ ntry.InnerText.ToString());
                 }
+                listBox1.Items.Add("Teszt");
+
 
             }
 
@@ -368,7 +382,7 @@ namespace WindowsFormsApp_NET_Framework
                                     {
                                         if (node3.Name == "Amt")
                                         {
-                                            ntryAmount = node3.InnerText;
+                                            ntryAmount = node3.InnerText.Replace('.',',');
 
                                             accCurrencyCode = (node3 as XmlElement).GetAttribute("Ccy");
 
@@ -597,6 +611,11 @@ namespace WindowsFormsApp_NET_Framework
                     MessageBox.Show("A TXT file mentése SIKERTELEN!");
                 }
             }
+
+        }
+
+        private void listBox1_SelectedIndexChanged(object sender, EventArgs e)
+        {
 
         }
     }
