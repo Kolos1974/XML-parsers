@@ -167,14 +167,29 @@ namespace WindowsFormsApp_NET_Framework
         private void btnSaveSzla_Click(object sender, EventArgs e)
         {
             XmlNode tempNode;
-
             XmlNodeList tempNodeList;
-
 
             Boolean choosedAcc = false;
             String choosedAccNum = "";
-            String accNumDescription;
+            String accNumName = "";
+            String accAccountDate = "";
+            String accTransType = "";
+            String accCurrencyCode = "";
+            String accTransId = "";
+            String accCustName = "";
+            String accCustBankAccount = "";
+            String accCustBankAccountName = "";
+            String accNotice1 = "";
+            String accNotice2 = "";
+            String accNotice3 = "";
+            String ntryAmount = "";
+            String accValueDate = "";
 
+            // Nem szerepelnek a CAM formátumban!!
+            String accOriginCurrencyCode = "";
+            String accOriginAmount = "";
+
+            String cdtDbtInd = "";
 
             if (saveFileDialog1.ShowDialog() == DialogResult.OK)
             {
@@ -320,10 +335,11 @@ namespace WindowsFormsApp_NET_Framework
                                                         choosedAccNum = "";
                                                     }
                                                 }
-
                                             }
-
-
+                                        }
+                                        if (node3.Name == "Nm")
+                                        {
+                                            accNumName = node3.InnerText;
                                         }
                                     }
 
@@ -335,79 +351,246 @@ namespace WindowsFormsApp_NET_Framework
                                 // 
                                 if ((node2.Name == "Ntry") && choosedAcc)
                                 {
+                                    // Inicializálni kell a változót, mert nem mindegyik tételnél van TrID!
+                                    accTransId = "";
+                                    accCustName = "";
+                                    accCustBankAccount = "";
+                                    accNotice1 = "";
+                                    accNotice2 = "";
+                                    accNotice3 = "";
+                                    accOriginCurrencyCode = "";
+                                    accOriginAmount = "";
+
+                                    cdtDbtInd = "";
+
                                     tempNodeList = node2.ChildNodes;
                                     foreach (XmlNode node3 in tempNodeList)
                                     {
                                         if (node3.Name == "Amt")
                                         {
-                                            sw.Write(textBox1.Text);
-                                            sw.Write("|");
-                                            sw.Write("Pénzforgalmi Bankszámla");
-                                            sw.Write("|");
-                                            sw.Write("Dátum");
-                                            sw.Write("|");
-                                            sw.Write("TR kód");
-                                            sw.Write("|");
-                                            sw.Write("Pénznem");
-                                            sw.Write("|");
-                                            sw.Write("TR ID");
-                                            sw.Write("|");
-                                            sw.Write("Játékos neve");
-                                            sw.Write("|");
-                                            sw.Write("Játékos bankszámlaszáma");
-                                            sw.Write("|");
-                                            sw.Write("|");
-                                            sw.Write("|");
-                                            sw.Write("Megjegyzés 1");
-                                            sw.Write("|");
-                                            sw.Write("Megjegyzés 2");
-                                            sw.Write("|");
-                                            sw.Write("Megjegyzés 3");
-                                            sw.Write("|");
-                                            sw.Write(node3.InnerText);
-                                            sw.Write("|");
-                                            sw.Write("Dátum");
-                                            sw.Write("|");
-                                            sw.Write("|");
-                                            sw.WriteLine("|");
+                                            ntryAmount = node3.InnerText;
+
+                                            accCurrencyCode = (node3 as XmlElement).GetAttribute("Ccy");
+
+                                            // Ez is jó!!
+                                            // accCurrencyCode = node3.Attributes["Ccy"].Value;
                                         }
+
+                                        if (node3.Name == "CdtDbtInd")
+                                        {
+                                            cdtDbtInd = node3.InnerText;
+                                        }
+
+
+                                        if (node3.Name == "BookgDt")
+                                        {
+                                            foreach (XmlNode node4 in node3.ChildNodes)
+                                            {
+                                                if (node4.Name == "Dt")
+                                                {
+                                                    // Kezelni kellene, ha más a dátum formátum!!
+                                                    accAccountDate = node4.InnerText.ToString().Substring(0, 4) +
+                                                                     node4.InnerText.ToString().Substring(5, 2) +
+                                                                     node4.InnerText.ToString().Substring(8, 2);
+                                                }
+                                            }
+                                        }
+
+                                        if (node3.Name == "ValDt")
+                                        {
+                                            foreach (XmlNode node4 in node3.ChildNodes)
+                                            {
+                                                if (node4.Name == "Dt")
+                                                {
+                                                    // Kezelni kellene, ha más a dátum formátum!!
+                                                    accValueDate = node4.InnerText.ToString().Substring(0, 4) +
+                                                                     node4.InnerText.ToString().Substring(5, 2) +
+                                                                     node4.InnerText.ToString().Substring(8, 2);
+                                                }
+                                            }
+                                        }
+
+                                        if (node3.Name == "BkTxCd")
+                                        {
+                                            foreach (XmlNode node4 in node3.ChildNodes)
+                                            {
+                                                if (node4.Name == "Prtry")
+                                                {
+                                                    foreach (XmlNode node5 in node4.ChildNodes)
+                                                    {
+                                                        if (node5.Name == "Cd")
+                                                        {
+                                                            accTransType = node5.InnerText;
+
+                                                        }
+                                                    }
+                                                }
+                                            }
+                                        }
+
+                                        if (node3.Name == "NtryDtls")
+                                        {
+                                            foreach (XmlNode node4 in node3.ChildNodes)
+                                            {
+                                                if (node4.Name == "TxDtls")
+                                                {
+                                                    foreach (XmlNode node5 in node4.ChildNodes)
+                                                    {
+                                                        if (node5.Name == "Refs")
+                                                        {
+                                                            foreach (XmlNode node6 in node5.ChildNodes)
+                                                            {
+                                                                if (node6.Name == "TxId")
+                                                                {
+                                                                    accTransId = node6.InnerText;
+                                                                }
+                                                            }
+                                                        }
+
+                                                        if (node5.Name == "RltdPties")
+                                                        {
+                                                            foreach (XmlNode node6 in node5.ChildNodes)
+                                                            {
+                                                                if (node6.Name == "Dbtr")
+                                                                {
+                                                                    foreach (XmlNode node7 in node6.ChildNodes)
+                                                                    {
+                                                                        if (node7.Name == "Nm")
+                                                                        {
+                                                                            accCustName = node7.InnerText;
+                                                                        }
+                                                                    }
+                                                                }
+
+                                                                if (node6.Name == "DbtrAcct")
+                                                                {
+                                                                    foreach (XmlNode node7 in node6.ChildNodes)
+                                                                    {
+                                                                        if (node7.Name == "Id")
+                                                                        {
+                                                                            foreach (XmlNode node8 in node7.ChildNodes)
+                                                                            {
+                                                                                if (node8.Name == "IBAN")
+                                                                                {
+                                                                                    accCustBankAccount = node8.InnerText;
+                                                                                }
+                                                                            }
+                                                                        }
+                                                                    }
+                                                                }
+                                                            }
+                                                        }
+
+
+                                                        if (node5.Name == "RmtInf")
+                                                        {
+                                                            foreach (XmlNode node6 in node5.ChildNodes)
+                                                            {
+                                                                if (node6.Name == "Ustrd")
+                                                                {
+                                                                    int textLength = node6.InnerText.Length;
+
+                                                                    // Maximalizálom a 3*35 karakterre.
+                                                                    if (textLength > 105) 
+                                                                    {
+                                                                        textLength = 105;
+                                                                    }
+
+                                                                    if (textLength > 70)
+                                                                    {
+                                                                        accNotice3 = node6.InnerText.Substring(70, textLength - 70);
+                                                                        textLength = 70;
+                                                                    }
+                                                                    if (textLength>35)
+                                                                    {
+                                                                        accNotice2 = node6.InnerText.Substring(35, textLength - 35);
+                                                                        textLength = 35;
+                                                                    }
+                                                                    if (textLength > 0)
+                                                                    {
+                                                                        accNotice1 = node6.InnerText.Substring(0, textLength);
+                                                                    }
+                                                                }
+                                                            }
+                                                        }
+                                                    }
+                                                }
+                                            }
+                                        }
+
                                     }
-                                    // sw.WriteLine(" ");
-                                }
 
-
-                                /*
-                                sw.WriteLine("");
-                                sw.WriteLine("--------------- 5 ----------------");
-                                sw.WriteLine("");
-                                */
-
-
-                                /*
-                                if (choosedAcc)
-                                {
-                                    // Ez nem jó, mert az Stmt összes elemén végigmegy!
-                                    foreach (XmlNode node2 in nodeListNtry)
+                                    // A jóváírás tétel kiírása
+                                    if (cdtDbtInd == "CRDT")
                                     {
-                                        sw.WriteLine(node2.InnerText);
-
-
-                                        sw.Write("|||");
-                                        sw.Write(" ");
+                                        sw.Write(textBox1.Text);
+                                        sw.Write("|");
+                                        sw.Write(accNumName);
+                                        sw.Write("|");
+                                        sw.Write(accAccountDate);
+                                        sw.Write("|");
+                                        sw.Write(accTransType);
+                                        sw.Write("|");
+                                        sw.Write(accCurrencyCode);
+                                        sw.Write("|");
+                                        sw.Write(accTransId);
+                                        sw.Write("|");
+                                        sw.Write(accCustName);
+                                        sw.Write("|");
+                                        sw.Write(accCustBankAccount);
+                                        sw.Write("|");
+                                        sw.Write(accCustBankAccountName);
+                                        sw.Write("|");
+                                        sw.Write("|");
+                                        sw.Write(accNotice1);
+                                        sw.Write("|");
+                                        sw.Write(accNotice2);
+                                        sw.Write("|");
+                                        sw.Write(accNotice3);
+                                        sw.Write("|");
+                                        sw.Write(ntryAmount);
+                                        sw.Write("|");
+                                        sw.Write(accValueDate);
+                                        sw.Write("|");
+                                        sw.Write(accOriginCurrencyCode);
+                                        sw.Write("|");
+                                        sw.Write(accOriginAmount);
+                                        sw.WriteLine("|");
                                     }
 
+                                    /*
+                                    sw.WriteLine("");
+                                    sw.WriteLine("--------------- 5 ----------------");
+                                    sw.WriteLine("");
+                                    */
+
+
+                                    /*
+                                    if (choosedAcc)
+                                    {
+                                        // Ez nem jó, mert az Stmt összes elemén végigmegy!
+                                        foreach (XmlNode node2 in nodeListNtry)
+                                        {
+                                            sw.WriteLine(node2.InnerText);
+
+
+                                            sw.Write("|||");
+                                            sw.Write(" ");
+                                        }
+
+                                    }
+                                    */
+
+
+                                    // sw.WriteLine("|");
                                 }
-                                */
 
 
-                                // sw.WriteLine("|");
                             }
-
-
                         }
                         MessageBox.Show("A TXT file mentésre került!");
-                    }
 
+                    }
                 }
                 catch (Exception ex)
                 {
