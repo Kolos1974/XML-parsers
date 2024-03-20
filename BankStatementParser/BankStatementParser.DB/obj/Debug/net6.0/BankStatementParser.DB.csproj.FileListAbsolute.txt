@@ -1,0 +1,15 @@
+C:\Users\Kolos\Documents\Sajat\XML-parsers\BankStatementParser\BankStatementParser.DB\bin\Debug\net6.0\BankStatementParser.DB.exe
+C:\Users\Kolos\Documents\Sajat\XML-parsers\BankStatementParser\BankStatementParser.DB\bin\Debug\net6.0\BankStatementParser.DB.deps.json
+C:\Users\Kolos\Documents\Sajat\XML-parsers\BankStatementParser\BankStatementParser.DB\bin\Debug\net6.0\BankStatementParser.DB.runtimeconfig.json
+C:\Users\Kolos\Documents\Sajat\XML-parsers\BankStatementParser\BankStatementParser.DB\bin\Debug\net6.0\BankStatementParser.DB.dll
+C:\Users\Kolos\Documents\Sajat\XML-parsers\BankStatementParser\BankStatementParser.DB\bin\Debug\net6.0\BankStatementParser.DB.pdb
+C:\Users\Kolos\Documents\Sajat\XML-parsers\BankStatementParser\BankStatementParser.DB\obj\Debug\net6.0\BankStatementParser.DB.csproj.AssemblyReference.cache
+C:\Users\Kolos\Documents\Sajat\XML-parsers\BankStatementParser\BankStatementParser.DB\obj\Debug\net6.0\BankStatementParser.DB.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\Kolos\Documents\Sajat\XML-parsers\BankStatementParser\BankStatementParser.DB\obj\Debug\net6.0\BankStatementParser.DB.AssemblyInfoInputs.cache
+C:\Users\Kolos\Documents\Sajat\XML-parsers\BankStatementParser\BankStatementParser.DB\obj\Debug\net6.0\BankStatementParser.DB.AssemblyInfo.cs
+C:\Users\Kolos\Documents\Sajat\XML-parsers\BankStatementParser\BankStatementParser.DB\obj\Debug\net6.0\BankStatementParser.DB.csproj.CoreCompileInputs.cache
+C:\Users\Kolos\Documents\Sajat\XML-parsers\BankStatementParser\BankStatementParser.DB\obj\Debug\net6.0\BankStatementParser.DB.dll
+C:\Users\Kolos\Documents\Sajat\XML-parsers\BankStatementParser\BankStatementParser.DB\obj\Debug\net6.0\refint\BankStatementParser.DB.dll
+C:\Users\Kolos\Documents\Sajat\XML-parsers\BankStatementParser\BankStatementParser.DB\obj\Debug\net6.0\BankStatementParser.DB.pdb
+C:\Users\Kolos\Documents\Sajat\XML-parsers\BankStatementParser\BankStatementParser.DB\obj\Debug\net6.0\BankStatementParser.DB.genruntimeconfig.cache
+C:\Users\Kolos\Documents\Sajat\XML-parsers\BankStatementParser\BankStatementParser.DB\obj\Debug\net6.0\ref\BankStatementParser.DB.dll

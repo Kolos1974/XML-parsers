@@ -1,0 +1,94 @@
+{
+  "version": 3,
+  "targets": {
+    "net6.0-windows7.0": {
+      "BankStatementParser.DB/1.0.0": {
+        "type": "project",
+        "framework": ".NETCoreApp,Version=v6.0",
+        "compile": {
+          "bin/placeholder/BankStatementParser.DB.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/BankStatementParser.DB.dll": {}
+        }
+      }
+    }
+  },
+  "libraries": {
+    "BankStatementParser.DB/1.0.0": {
+      "type": "project",
+      "path": "../BankStatementParser.DB/BankStatementParser.DB.csproj",
+      "msbuildProject": "../BankStatementParser.DB/BankStatementParser.DB.csproj"
+    }
+  },
+  "projectFileDependencyGroups": {
+    "net6.0-windows7.0": [
+      "BankStatementParser.DB >= 1.0.0"
+    ]
+  },
+  "packageFolders": {
+    "C:\\Users\\Kolos\\.nuget\\packages\\": {}
+  },
+  "project": {
+    "version": "1.0.0",
+    "restore": {
+      "projectUniqueName": "C:\\Users\\Kolos\\Documents\\Sajat\\XML-parsers\\BankStatementParser\\BankStatementParser.UI\\BankStatementParser.UI.csproj",
+      "projectName": "BankStatementParser.UI",
+      "projectPath": "C:\\Users\\Kolos\\Documents\\Sajat\\XML-parsers\\BankStatementParser\\BankStatementParser.UI\\BankStatementParser.UI.csproj",
+      "packagesPath": "C:\\Users\\Kolos\\.nuget\\packages\\",
+      "outputPath": "C:\\Users\\Kolos\\Documents\\Sajat\\XML-parsers\\BankStatementParser\\BankStatementParser.UI\\obj\\",
+      "projectStyle": "PackageReference",
+      "configFilePaths": [
+        "C:\\Users\\Kolos\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+      ],
+      "originalTargetFrameworks": [
+        "net6.0-windows"
+      ],
+      "sources": {
+        "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+        "https://api.nuget.org/v3/index.json": {}
+      },
+      "frameworks": {
+        "net6.0-windows7.0": {
+          "targetAlias": "net6.0-windows",
+          "projectReferences": {
+            "C:\\Users\\Kolos\\Documents\\Sajat\\XML-parsers\\BankStatementParser\\BankStatementParser.DB\\BankStatementParser.DB.csproj": {
+              "projectPath": "C:\\Users\\Kolos\\Documents\\Sajat\\XML-parsers\\BankStatementParser\\BankStatementParser.DB\\BankStatementParser.DB.csproj"
+            }
+          }
+        }
+      },
+      "warningProperties": {
+        "warnAsError": [
+          "NU1605"
+        ]
+      }
+    },
+    "frameworks": {
+      "net6.0-windows7.0": {
+        "targetAlias": "net6.0-windows",
+        "imports": [
+          "net461",
+          "net462",
+          "net47",
+          "net471",
+          "net472",
+          "net48",
+          "net481"
+        ],
+        "assetTargetFallback": true,
+        "warn": true,
+        "frameworkReferences": {
+          "Microsoft.NETCore.App": {
+            "privateAssets": "all"
+          },
+          "Microsoft.WindowsDesktop.App.WindowsForms": {
+            "privateAssets": "none"
+          }
+        },
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.202\\RuntimeIdentifierGraph.json"
+      }
+    }
+  }
+}
