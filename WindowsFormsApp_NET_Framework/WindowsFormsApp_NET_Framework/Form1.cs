@@ -313,6 +313,8 @@ namespace WindowsFormsApp_NET_Framework
                                     {
                                         if (node3.Name == "Id")
                                         {
+
+                                            // Ez nem talál semmit!!
                                             XmlNode noteFind = node3.SelectSingleNode("IBAN");
                                             if (noteFind != null)
                                             {
